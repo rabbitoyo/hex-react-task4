@@ -1,0 +1,20 @@
+.btn-outline-primary {
+    @include button-outline-variant(
+        $primary,
+        // border-color
+        $white,
+        // hover-color
+        $primary,
+        // active-bg
+        $primary,
+        // active-border-color
+        $white // active-color
+    );
+    &:disabled,
+    &.disabled {
+        color: $secondary;
+        background-color: transparent;
+        border-color: $secondary;
+        opacity: 1;
+    }
+}

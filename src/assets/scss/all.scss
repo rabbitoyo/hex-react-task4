@@ -1,0 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100..900&display=swap');
+
+// bootstrap
+@import 'bootstrap/scss/functions';
+@import './utils/variables';
+@import 'bootstrap';
+
+// base
+@import './base/base';
+
+// components
+@import './components/button';
+@import './components/modal';
+
+// pages
+@import './pages/loading';
+@import './pages/login';
+@import './pages/dashboard';

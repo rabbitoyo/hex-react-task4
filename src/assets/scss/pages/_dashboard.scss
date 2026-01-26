@@ -1,0 +1,29 @@
+.dashboard {
+    .sidebar {
+        position: fixed;
+        max-width: 250px;
+        width: 100%;
+        min-height: 100%;
+        z-index: 1;
+
+        .nav-link {
+            &.active {
+                color: $primary;
+                background: $white;
+            }
+        }
+    }
+    .content {
+        margin-left: 250px;
+
+        .form-check-input {
+            cursor: pointer;
+        }
+
+        .img-thumbnail {
+            width: 150px;
+            height: 100px;
+            object-fit: cover;
+        }
+    }
+}
