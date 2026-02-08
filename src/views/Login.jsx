@@ -1,7 +1,13 @@
 import { useState } from 'react';
 
+// Utils
+import { setToken, getErrorMessage } from '../utils';
+
+// API
+import { loginApi } from '../api/auth';
+
 // Login 元件
-const Login = ({ handleLogin }) => {
+const Login = ({ getProducts, setIsLoading, setIsAuth }) => {
     const [account, setAccount] = useState({ username: '', password: '' });
 
     // 拿到用戶 input 的 value
@@ -10,13 +16,32 @@ const Login = ({ handleLogin }) => {
         setAccount((prevData) => ({ ...prevData, [name]: value }));
     };
 
-    const onSubmit = (e) => {
+    // 登入
+    const handleLogin = async (e) => {
         e.preventDefault();
-        handleLogin(account); // 把填好的資料傳回給 App
+        try {
+            setIsLoading(true);
+
+            const res = await loginApi(account);
+
+            // token - 儲存 Token 到 Cookie
+            const { token, expired } = res.data;
+            setToken(token, expired);
+
+            // 取得產品
+            await getProducts();
+
+            // 登入成功
+            setIsAuth(true);
+        } catch (error) {
+            alert(`${getErrorMessage(error)}!`);
+        } finally {
+            setIsLoading(false);
+        }
     };
 
     return (
-        <div className="login position-fixed w-100 h-100 d-flex justify-content-center align-items-center">
+        <section className="login position-fixed w-100 h-100 d-flex justify-content-center align-items-center">
             <div className="container">
                 <div className="login-box blur-layer rounded-4 overflow-hidden shadow mx-auto text-primary">
                     <div className="login-header text-center px-5 py-4 text-white">
@@ -29,7 +54,7 @@ const Login = ({ handleLogin }) => {
                         <p>開始您的旅程管理</p>
                     </div>
                     <div className="login-body p-5">
-                        <form className="pb-3" onSubmit={onSubmit}>
+                        <form className="pb-3" onSubmit={handleLogin}>
                             {/* input 綁定這裡內部的 handleInputChange */}
                             <div className="position-relative mb-3">
                                 <label htmlFor="username" className="form-label">
@@ -83,7 +108,7 @@ const Login = ({ handleLogin }) => {
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
     );
 };
 

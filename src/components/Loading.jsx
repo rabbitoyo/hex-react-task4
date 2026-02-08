@@ -15,11 +15,11 @@ const Loading = ({ isLoading }) => {
     if (!isLoading) return null; // 沒有 loading 就不 render
 
     return (
-        <div className="loading">
+        <section className="loading">
             <div className="spinner-border text-light" role="status">
                 <span className="visually-hidden">Loading...</span>
             </div>
-        </div>
+        </section>
     );
 };
 
