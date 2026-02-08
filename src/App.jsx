@@ -77,7 +77,7 @@ const App = () => {
                 await getProducts();
                 setIsAuth(true);
             } catch (error) {
-                alert(`請重新登入！Token 驗證失敗：${getErrorMessage(error)}`);
+                alert(`Token 驗證失敗：${getErrorMessage(error)}！`);
                 setIsAuth(false);
             } finally {
                 setIsLoading(false);
